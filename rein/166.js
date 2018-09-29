@@ -7,8 +7,8 @@ var fractionToDecimal = function(numerator, denominator) {
     if (denominator == 0) {
         return NaN;
     }
-    if (numerator == 0) {
-        return "0";
+    if (numerator % denominator == 0) {
+        return String(numerator / denominator);
     }
     const strParts = [];
     let sign = 1;
@@ -24,11 +24,9 @@ var fractionToDecimal = function(numerator, denominator) {
         strParts.push('-');
     }
     strParts.push(String(Math.floor(numerator / denominator)));
-    let remainder = numerator % denominator;
-    if (remainder == 0) {
-        return strParts.join('');
-    }
     strParts.push('.');
+
+    let remainder = numerator % denominator;
     const cycleDetector = new Map();
     while (remainder > 0) {
         if (cycleDetector.has(remainder)) {
